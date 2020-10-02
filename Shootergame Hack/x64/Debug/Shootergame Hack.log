@@ -1,6 +1,0 @@
-﻿  ESP.cpp
-C:\Users\jguo5\source\repos\Shootergame Hack\Shootergame Hack\globals.h(43,1): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\jguo5\source\repos\Shootergame Hack\Shootergame Hack\ESP.cpp(120,49): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\jguo5\source\repos\Shootergame Hack\Shootergame Hack\ESP.cpp(120,80): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\jguo5\source\repos\Shootergame Hack\Shootergame Hack\ESP.cpp(120,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Shootergame Hack.vcxproj -> C:\Users\jguo5\source\repos\Shootergame Hack\x64\Debug\Shootergame Hack.exe

@@ -1,0 +1,24 @@
+﻿  Aimbot.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\jguo5\source\repos\Shootergame Hack\Shootergame Hack\Menu.h(12,1): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h(42): message : see previous definition of 'DIRECTINPUT_VERSION'
+C:\Users\jguo5\source\repos\Shootergame Hack\Shootergame Hack\Menu.h(38,1): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\jguo5\source\repos\Shootergame Hack\Shootergame Hack\Menu.h(39,1): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\jguo5\source\repos\Shootergame Hack\Shootergame Hack\Menu.h(43,1): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\jguo5\source\repos\Shootergame Hack\Shootergame Hack\Aimbot.cpp(51,16): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=DWORD64
+          ]
+C:\Users\jguo5\source\repos\Shootergame Hack\Shootergame Hack\Aimbot.cpp(70,16): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\jguo5\source\repos\Shootergame Hack\Shootergame Hack\commands.h(10,30): warning C4244: 'argument': conversion from 'BOOL' to 'float', possible loss of data
+C:\Users\jguo5\source\repos\Shootergame Hack\Shootergame Hack\Aimbot.cpp(38): message : see reference to function template instantiation 'T Commands::write<vector3D>(HANDLE,DWORD64,T *)' being compiled
+          with
+          [
+              T=vector3D
+          ]
+  Shootergame Hack.vcxproj -> C:\Users\jguo5\source\repos\Shootergame Hack\x64\Debug\Shootergame Hack.exe
