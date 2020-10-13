@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shootergame Hack", "Shootergame Hack\Shootergame Hack.vcxproj", "{CB9F7C3B-3C71-4C34-A66A-BE18FC1D2BA1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shootergame Dumper", "Shootergame dumper\InstanceLogger.vcxproj", "{1044430B-4F82-4AD2-9851-65249D8F9C4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,11 +23,19 @@ Global
 		{CB9F7C3B-3C71-4C34-A66A-BE18FC1D2BA1}.Release|x64.Build.0 = Release|x64
 		{CB9F7C3B-3C71-4C34-A66A-BE18FC1D2BA1}.Release|x86.ActiveCfg = Release|Win32
 		{CB9F7C3B-3C71-4C34-A66A-BE18FC1D2BA1}.Release|x86.Build.0 = Release|Win32
+		{1044430B-4F82-4AD2-9851-65249D8F9C4A}.Debug|x64.ActiveCfg = Debug|x64
+		{1044430B-4F82-4AD2-9851-65249D8F9C4A}.Debug|x64.Build.0 = Debug|x64
+		{1044430B-4F82-4AD2-9851-65249D8F9C4A}.Debug|x86.ActiveCfg = Debug|Win32
+		{1044430B-4F82-4AD2-9851-65249D8F9C4A}.Debug|x86.Build.0 = Debug|Win32
+		{1044430B-4F82-4AD2-9851-65249D8F9C4A}.Release|x64.ActiveCfg = Release|x64
+		{1044430B-4F82-4AD2-9851-65249D8F9C4A}.Release|x64.Build.0 = Release|x64
+		{1044430B-4F82-4AD2-9851-65249D8F9C4A}.Release|x86.ActiveCfg = Release|Win32
+		{1044430B-4F82-4AD2-9851-65249D8F9C4A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {94D7782F-BC66-41AC-95FE-D10C58F6609F}
+		SolutionGuid = {24D1DB33-F55C-49D2-9746-AA4FE5C0AB46}
 	EndGlobalSection
 EndGlobal

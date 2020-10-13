@@ -5,4 +5,5 @@
 #include "Math.h"
 
 
-int		ESP(bool players, bool items, bool ActorID);
+int		ESP(bool players, bool items, bool ActorID, bool showFOVcircle);
+bool	WorldToScreen(vector3D world, vector2D* screen, vector3D Rotation, vector3D cameraPosition, float FovAngle);

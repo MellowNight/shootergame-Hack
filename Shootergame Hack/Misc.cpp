@@ -18,34 +18,35 @@ int		actorCount;
 void	updateInfo(DWORD64	moduleBase)
 {
 	/*	get GWorld	0F 2E c1 74 ? 48 8B 1D ? ? ? ? 48 85 DB 74	*/
-	GWorldAddr = Commands::read<DWORD64>(Globals->processHandle, (moduleBase + Offsets::GWORLD));
+	GWorldAddr = Driver::read<DWORD64>(Globals->processHandle, (moduleBase + Offsets::GWORLD));
 
-	gameInstance = Commands::read<DWORD64>(Globals->processHandle, (GWorldAddr + Offsets::gameInstance));
+	gameInstance = Driver::read<DWORD64>(Globals->processHandle, (GWorldAddr + Offsets::gameInstance));
 
-	localPlayers = Commands::read<DWORD64>(Globals->processHandle, (gameInstance + Offsets::localPlayers));
+	localPlayers = Driver::read<DWORD64>(Globals->processHandle, (gameInstance + Offsets::localPlayers));
 
-	localPlayer = Commands::read<DWORD64>(Globals->processHandle, (localPlayers));
+	localPlayer = Driver::read<DWORD64>(Globals->processHandle, (localPlayers));
 
-	playerController = Commands::read<DWORD64>(Globals->processHandle, (localPlayer + Offsets::playerController));
+	playerController = Driver::read<DWORD64>(Globals->processHandle, (localPlayer + Offsets::playerController));
 
-	localPawn = Commands::read<DWORD64>(Globals->processHandle, (playerController + Offsets::APawn));
+	localPawn = Driver::read<DWORD64>(Globals->processHandle, (playerController + Offsets::APawn));
 
-	RootComponent = Commands::read<DWORD64>(Globals->processHandle, (localPawn + Offsets::RootComponent));
+	RootComponent = Driver::read<DWORD64>(Globals->processHandle, (localPawn + Offsets::RootComponent));
 
-	persistentLevel = Commands::read<DWORD64>(Globals->processHandle, (GWorldAddr + Offsets::persistentLevel));
+	persistentLevel = Driver::read<DWORD64>(Globals->processHandle, (GWorldAddr + Offsets::persistentLevel));
 
-	actorList = Commands::read<DWORD64>(Globals->processHandle, (persistentLevel + Offsets::actorsArray));
+	actorList = Driver::read<DWORD64>(Globals->processHandle, (persistentLevel + Offsets::actorsArray));
 
-	CameraManager = Commands::read<DWORD64>(Globals->processHandle, (playerController + Offsets::CameraManager));
+	CameraManager = Driver::read<DWORD64>(Globals->processHandle, (playerController + Offsets::CameraManager));
 
-	localPawn = Commands::read<DWORD64>(Globals->processHandle, (playerController + Offsets::APawn));
+	localPawn = Driver::read<DWORD64>(Globals->processHandle, (playerController + Offsets::APawn));
 
-	actorCount = Commands::read<DWORD64>(Globals->processHandle, (localGameInfo->persistentLevel + Offsets::actorCount));
+	actorCount = Driver::read<DWORD64>(Globals->processHandle, (localGameInfo->persistentLevel + Offsets::actorCount));
 
-	localGameInfo->position = Commands::read<vector3D>(Globals->processHandle, (localGameInfo->rootComponent + Offsets::Translation));
+	localGameInfo->position = Driver::read<vector3D>(Globals->processHandle, (localGameInfo->rootComponent + Offsets::Translation));
 
-	int localActorId = Commands::read<DWORD64>(Globals->processHandle, (localPlayer + 0x18));
+	int localActorId = Driver::read<DWORD64>(Globals->processHandle, (localPlayer + 0x18));
 	
+
 	localGameInfo->localPlayer = localPlayer;
 	localGameInfo->playerController = playerController;
 	localGameInfo->localPawn = localPawn;
@@ -58,8 +59,10 @@ void	updateInfo(DWORD64	moduleBase)
 	localGameInfo->localactorId = localActorId;
 
 
-
 	initWindow(Globals->processID);
+
+	Globals->screenWidth = GetScreenInfo().realWidth;
+	Globals->screenHeight = GetScreenInfo().realHeight;
 
 }
 
@@ -72,18 +75,18 @@ void	handleMiscCommands(HANDLE	processHandle, DWORD64	localPawn)
 	vector3D	xyz;
 	char		scopeLock = 0xFF;
 
-	localGameInfo->currentWeapon = Commands::read<DWORD64>(Globals->processHandle, localPawn + Offsets::CurrentWeapon);
+	localGameInfo->currentWeapon = Driver::read<DWORD64>(Globals->processHandle, localPawn + Offsets::CurrentWeapon);
 
 
 	if (menuControl->godMode == true)
 	{
-		Commands::write<float>(Globals->processHandle, (localPawn + Offsets::pawnHealth), &health);
+		Driver::write<float>(Globals->processHandle, (localPawn + Offsets::pawnHealth), &health);
 	}
 
 
 	if (menuControl->infinitAmmo == true)
 	{
-		Commands::write(Globals->processHandle, (localGameInfo->currentWeapon + Offsets::currentAmmo), &Ammo);
+		Driver::write(Globals->processHandle, (localGameInfo->currentWeapon + Offsets::currentAmmo), &Ammo);
 	}
 
 
@@ -93,25 +96,25 @@ void	handleMiscCommands(HANDLE	processHandle, DWORD64	localPawn)
 
 		if (GetAsyncKeyState(VK_SPACE))
 		{
-				xyz = Commands::read<vector3D>(Globals->processHandle, (localGameInfo->rootComponent + Offsets::Translation));
+				xyz = Driver::read<vector3D>(Globals->processHandle, (localGameInfo->rootComponent + Offsets::Translation));
 
 				xyz.z += 0.5f;
 
-				Commands::write<vector3D>(Globals->processHandle, (localGameInfo->rootComponent + Offsets::Translation), &xyz);
+				Driver::write<vector3D>(Globals->processHandle, (localGameInfo->rootComponent + Offsets::Translation), &xyz);
 				lastTick = GetTickCount();
 		}
 	}
 
 	if (menuControl->highSpeed)
 	{
-		Commands::write<float>(Globals->processHandle, (localGameInfo->localPawn + Offsets::RunningSpeedModifier), &menuControl->runningSpeed);
+		Driver::write<float>(Globals->processHandle, (localGameInfo->localPawn + Offsets::RunningSpeedModifier), &menuControl->runningSpeed);
 	}
 
 
 	if (menuControl->scopeIn == true)
 	{
 		scopeLock = 0xFF;
-		Commands::write<char>(Globals->processHandle, (localGameInfo->localPawn + Offsets::IsTargeting), &scopeLock);
+		Driver::write<char>(Globals->processHandle, (localGameInfo->localPawn + Offsets::IsTargeting), &scopeLock);
 	}
 }
 

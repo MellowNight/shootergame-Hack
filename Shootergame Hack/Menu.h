@@ -26,17 +26,20 @@ public:
 	bool	playerESP;
 	bool	ItemESP;
 	bool	ActorIdESP;
-	float	ESPcolor[3];
+	float	ESPcolor[4];
 	bool	showESPcolor;
 	bool	aimbot;
+	bool	showFOVcircle;
+	int		aimSmooth;
+	float	FOVcircleRadius;
 
 	MenuControl()
 	{
 		aimbot = false;
 		showESPcolor = false;
-		ESPcolor[0] = 0.25;
-		ESPcolor[1] = 0.15;
-		ESPcolor[2] = 0.60;
+		ESPcolor[0] = 1.00;
+		ESPcolor[1] = 0;
+		ESPcolor[2] = 0.26;
 		godMode = false;
 		infinitAmmo = false;
 		highJump = false;
@@ -46,8 +49,20 @@ public:
 		playerESP = false;
 		ItemESP = false;
 		ActorIdESP = false;
+		aimSmooth = 12;
+		FOVcircleRadius = 140.0f;
 	}
 
 };
 
 extern MenuControl* menuControl;
+
+
+typedef struct _ScreenInfo {
+	int width;
+	int height;
+	int realWidth;
+	int realHeight;
+} ScreenInfo;
+
+ScreenInfo GetScreenInfo();

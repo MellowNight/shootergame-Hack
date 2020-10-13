@@ -83,14 +83,10 @@ void Render::Progress(int x, int y, int w, int h, int phealth)
     int healthValue = max(0, min(phealth, 100));
     float HealthPerc = healthValue / 100.f;
 
-    ImColor barColor = ImColor(
-        min(510 * (100 - healthValue) / 100, 255),
-        min(510 * healthValue / 100, 255),
-        25,
-        255
-    );
+    ImColor barColor = ImColor(0, 255, 0);
 
     RectFilled(x, y, x + w, y + (int)(((float)h / 100.0f) * (float)phealth), barColor, 0.0f, 0);
+
 }
 
 HWND    FindTopWindow(DWORD pid)

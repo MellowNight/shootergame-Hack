@@ -49,6 +49,11 @@ struct vector2D
 		x = f_x;
 		y = f_y;
 	}
+
+	float	distance(vector2D v)
+	{
+		return sqrt(pow((v.x - x), 2) + pow((v.y - y), 2));
+	}
 };
 
 struct vMatrix

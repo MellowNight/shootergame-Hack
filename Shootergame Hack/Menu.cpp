@@ -19,14 +19,6 @@ HWND hwnd;
 MARGINS gMargin = { 0, 0, 600, 600 };
 MARGINS zero = { -1, -1, -1, -1 };
 
-
-typedef struct _ScreenInfo {
-    int width;
-    int height;
-    int realWidth;
-    int realHeight;
-} ScreenInfo;
-
 ScreenInfo GetScreenInfo()
 {
     ScreenInfo sci = { 0 };
@@ -38,23 +30,21 @@ ScreenInfo GetScreenInfo()
 }
 
 
-
-
 void    displayInfo()
 {
     int         actorCount;
     float		health;
     float       runningSpeed;
 
-    actorCount = Commands::read<int>(Globals->processHandle, (localGameInfo->persistentLevel + Offsets::actorCount));
+    actorCount = Driver::read<int>(Globals->processHandle, (localGameInfo->persistentLevel + Offsets::actorCount));
 
-    health = Commands::read<float>(Globals->processHandle, (localGameInfo->localPawn + Offsets::pawnHealth));
+    health = Driver::read<float>(Globals->processHandle, (localGameInfo->localPawn + Offsets::pawnHealth));
 
-    runningSpeed = Commands::read<float>(Globals->processHandle, (localGameInfo->localPawn + Offsets::RunningSpeedModifier));
+    runningSpeed = Driver::read<float>(Globals->processHandle, (localGameInfo->localPawn + Offsets::RunningSpeedModifier));
 
 
-    DWORD64 aCameraManager = Commands::read<DWORD64>(Globals->processHandle, (localGameInfo->playerController + Offsets::CameraManager));
-    vector3D	angle = Commands::read<vector3D>(Globals->processHandle,
+    DWORD64 aCameraManager = Driver::read<DWORD64>(Globals->processHandle, (localGameInfo->playerController + Offsets::CameraManager));
+    vector3D	angle = Driver::read<vector3D>(Globals->processHandle,
         (aCameraManager + Offsets::cameraCachePrivate + Offsets::POV + Offsets::cameraRotation), &angle);
 
     ImGui::Text("actor count %i ", actorCount);
@@ -181,11 +171,7 @@ int    OverlayLoop()
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
     io.IniFilename = NULL;
 
-    Globals->windowWidth = GetScreenInfo().width;
-    Globals->windowHeight = GetScreenInfo().height;
 
-    Globals->RealWindowWidth = GetScreenInfo().realWidth;
-    Globals->RealWindowHeight = GetScreenInfo().realHeight;
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
@@ -259,7 +245,7 @@ int    OverlayLoop()
             SetWindowPos(hwnd, HWND_TOPMOST, Globals->positionX, Globals->positionY,
                 Globals->windowWidth, Globals->windowHeight, SWP_NOSIZE);
 
-            ESP(menuControl->playerESP, menuControl->ItemESP, menuControl->ActorIdESP);
+            ESP(menuControl->playerESP, menuControl->ItemESP, menuControl->ActorIdESP, menuControl->showFOVcircle);
          
 
             Render::End();
@@ -408,6 +394,17 @@ void MenuShow()
             ImGui::Text("Aimbot");
 
             ImGui::Checkbox("Aimbot", &menuControl->aimbot);
+
+            if (menuControl->aimbot == true)
+            {
+                ImGui::SliderInt("Aim smoothing ", &menuControl->aimSmooth, 1, 50);
+            }
+            ImGui::Checkbox("show FOV circle: ", &menuControl->showFOVcircle);
+
+            if (menuControl->showFOVcircle == true)
+            {
+                ImGui::SliderFloat("FOV circle radius: ", &menuControl->FOVcircleRadius, 100.0f, 300.0f);
+            }
 
             ImGui::EndTabItem();
         }

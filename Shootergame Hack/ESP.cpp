@@ -1,7 +1,7 @@
 ﻿#include "ESP.h"
 #include "Render.h"
 #include "Menu.h"
-
+#include "Aimbot.h"
 
 
 
@@ -48,29 +48,29 @@ float		cameraFOV;
 vector3D	xyz;
 
 
-int ESP(bool players, bool items, bool showActorID)
+int ESP(bool players, bool items, bool showActorID, bool showFOVcircle)
 {
 
 	for (int i = 0; i < localGameInfo->actorCount; ++i)
 	{
-		currentActor = Commands::read<DWORD64>(Globals->processHandle, (localGameInfo->actorList + 0x8 * i));
+		currentActor = Driver::read<DWORD64>(Globals->processHandle, (localGameInfo->actorList + 0x8 * i));
 
-		int actorID = Commands::read<DWORD64>(Globals->processHandle, (currentActor + 0x18));
+		int actorID = Driver::read<DWORD64>(Globals->processHandle, (currentActor + 0x18));
 
-		rootComponent = Commands::read<DWORD64>(Globals->processHandle, (currentActor + Offsets::RootComponent));
+		rootComponent = Driver::read<DWORD64>(Globals->processHandle, (currentActor + Offsets::RootComponent));
 
-		xyz = Commands::read<vector3D>(Globals->processHandle, (rootComponent + Offsets::Translation));
+		xyz = Driver::read<vector3D>(Globals->processHandle, (rootComponent + Offsets::Translation));
 
-		cameraManager = Commands::read<DWORD64>(Globals->processHandle, (localGameInfo->playerController + Offsets::CameraManager));
+		cameraManager = Driver::read<DWORD64>(Globals->processHandle, (localGameInfo->playerController + Offsets::CameraManager));
 
-		cameraLocation = Commands::read<vector3D>(Globals->processHandle, (cameraManager + Offsets::cameraCachePrivate + Offsets::POV +
+		cameraLocation = Driver::read<vector3D>(Globals->processHandle, (cameraManager + Offsets::cameraCachePrivate + Offsets::POV +
 			Offsets::cameraVector));
 
-		cameraAngle = Commands::read<vector3D>(Globals->processHandle,
+		cameraAngle = Driver::read<vector3D>(Globals->processHandle,
 			(cameraManager + Offsets::cameraCachePrivate + Offsets::POV + Offsets::cameraRotation));
 
-		cameraFOV = Commands::read<float>(Globals->processHandle, (cameraManager + Offsets::cameraCachePrivate + Offsets::POV + Offsets::cameraFOV));
-		int health = Commands::read<float>(Globals->processHandle, (currentActor + Offsets::pawnHealth));
+		cameraFOV = Driver::read<float>(Globals->processHandle, (cameraManager + Offsets::cameraCachePrivate + Offsets::POV + Offsets::cameraFOV));
+		int health = Driver::read<float>(Globals->processHandle, (currentActor + Offsets::pawnHealth));
 
 
 
@@ -82,14 +82,18 @@ int ESP(bool players, bool items, bool showActorID)
 			if (players)
 			{
 				/* 526275 for enemy, 325547 for local */
-				if (actorID == localGameInfo->localactorId || actorID == localGameInfo->localactorId + 200728 || actorID == 526275)
+				if (actorID == 526317)
 				{
 					if (health > 0)
 					{
 						float distance = localGameInfo->position.distance(xyz);
 
 						Render::DrawBox(ImColor(menuControl->ESPcolor[0], menuControl->ESPcolor[1], menuControl->ESPcolor[2], 1.0f),
-							screenCoords.x - (35000/distance), screenCoords.y - (45000/distance), 45000 / distance, 100000 / distance);
+							screenCoords.x - (35000/distance), screenCoords.y - (45000/distance), 45000 / distance, 110000 / distance);
+
+
+						Render::Line(ImVec2(screenCoords.x - (35000 / distance), screenCoords.y - (45000 / distance) + (110000 / distance) - (2200 * health/distance)),
+							ImVec2(screenCoords.x - (35000 / distance), screenCoords.y - (45000 / distance) + (110000 / distance)), ImColor(0, 255, 0), 4);
 					}
 				}
 			}
@@ -99,29 +103,39 @@ int ESP(bool players, bool items, bool showActorID)
 				std::stringstream	ss;
 				ss << std::dec << actorID;
 				Render::EasyText(ImVec2(screenCoords.x, screenCoords.y), ImColor(menuControl->ESPcolor[0], menuControl->ESPcolor[1],
-					menuControl->ESPcolor[2], 1.0f), ss.str().c_str(), 1100);
+					menuControl->ESPcolor[2], 255.0f), ss.str().c_str(), 1100);
 			}
 
-			/*	899147 for rockets, 457713 for health	*/
+			/*	899147 for rockets, 457714 for health	*/
 			if (items)
 			{
 				switch (actorID)
 				{
 				case 457655:
 					Render::EasyText(ImVec2(screenCoords.x, screenCoords.y), ImColor(menuControl->ESPcolor[0], menuControl->ESPcolor[1],
-						menuControl->ESPcolor[2], 1.0f), "Rockets", 2000);
+						menuControl->ESPcolor[2], 255.0f), "Rockets", 2000);
 					break;
 				case 457713:
 					Render::EasyText(ImVec2(screenCoords.x, screenCoords.y), ImColor(menuControl->ESPcolor[0], menuControl->ESPcolor[1],
-						menuControl->ESPcolor[2], 1.0f), "Health kit", 2000);
+						menuControl->ESPcolor[2], 255.0f), "Health kit", 2000);
 					break;
 				case 457591:
 					Render::EasyText(ImVec2(screenCoords.x, screenCoords.y), ImColor(menuControl->ESPcolor[0], menuControl->ESPcolor[1],
-						menuControl->ESPcolor[2], 1.0f), "Bullets", 2000);
+						menuControl->ESPcolor[2], 255.0f), "Bullets", 2000);
 					break;
 				default:
 					break;
 				}
+			}
+
+			if (showFOVcircle)
+			{
+				vector2D windowCenter;
+				windowCenter.x = Globals->positionX + (Globals->windowWidth / 2);
+				windowCenter.y = Globals->positionY + (Globals->windowHeight / 2);
+
+				Render::Circle(ImVec2(windowCenter.x, windowCenter.y), ImColor(menuControl->ESPcolor[0], menuControl->ESPcolor[1], 
+					menuControl->ESPcolor[2], 255.0f), menuControl->FOVcircleRadius, 50, 1);
 			}
 		}
 	}

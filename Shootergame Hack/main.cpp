@@ -15,14 +15,10 @@ void Color(int color)
 
 
 
-
-
 int		main()
 {
 	int			procId = 0;
-
 	DWORD64		moduleBase;
-
 
 	Color(5);
 
@@ -42,7 +38,7 @@ int		main()
 	updateInfo(moduleBase);
 
 	std::thread		overlayLoop(OverlayLoop);
-	std::thread		aimThread(Aimbot);
+	std::thread		aimThread(mouseAimbot);
 
 	while(1)
 	{

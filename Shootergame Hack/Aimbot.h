@@ -3,4 +3,5 @@
 #include "commands.h"
 #include "Offsets.h"
 
-int Aimbot();
+int mouseAimbot();
+void aimAt(float x, float y);

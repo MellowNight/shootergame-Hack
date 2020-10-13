@@ -1,7 +1,7 @@
 #pragma once
 #include "utils.h"
 
-namespace Commands
+namespace Driver
 {
 	template <typename T>
 	T write(HANDLE handle, DWORD64 address, T* buffer)

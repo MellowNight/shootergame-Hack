@@ -40,11 +40,16 @@ public:
 	HANDLE		processHandle;
 	LONG		windowWidth;
 	LONG		windowHeight;
-	LONG		RealWindowWidth;
-	LONG		RealWindowHeight;
+	LONG		screenWidth;
+	LONG		screenHeight;
 	LONG		positionX;
 	LONG		positionY;
 };
 
 extern GLOBALS*			Globals;
 extern GAME_INFO*		localGameInfo;
+
+enum ACTOR_ID : int32_t
+{
+
+};
