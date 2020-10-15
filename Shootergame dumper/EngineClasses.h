@@ -1,5 +1,7 @@
 #pragma once
 
+
+
 template <class T>
 struct TArray
 {
@@ -14,28 +16,22 @@ struct FName
 	int32_t Number;
 };
 
-struct UClass;
 
-struct UObject
-{
-	void*    VTableObject;
-	int32_t  ObjectFlags;
-	int32_t  InternalIndex;
-	UClass*  ClassPrivate;
-	FName    Name;
-	UObject* Outer;
-};
 
+/*	needs fixing	*/
 struct FField
 {
 	PVOID		vTable;
-	PVOID		Owner;
+	PVOID		classPrivate;
+	char		Owner[0x10];
 	FField*		Next;
 	FName		NamePrivate;
 	int32_t		FlagsPrivate;
 };
 
 
+
+/*	needs fixing	*/
 struct FProperty : public FField
 {
 	int32_t		ArrayDim;
@@ -47,17 +43,34 @@ struct FProperty : public FField
 
 };
 
+struct UStruct;
+
+/*	needs fixing	*/
+struct UObject
+{
+	void*	VTableObject;
+	int32_t  ObjectFlags;
+	int32_t  InternalIndex;
+	UStruct* ClassPrivate;
+	FName    Name;
+	UObject* Outer;
+};
+
+
 
 struct UField : public UObject
 {
 	UField* Next;
 };
 
+
+/*	needs fixing	*/
 struct UStruct : public UField
 {
+	char			inheritedPad[0x10];
 	UStruct*		SuperStruct;
 	UField*			Children;
-	PVOID			childProperties;
+	FField*			childProperties;
 	int32_t			PropertySize;
 	int32_t			MinAlignment;
 	TArray<char>	Script;
@@ -68,11 +81,8 @@ struct UStruct : public UField
 	TArray<UObject*> ScriptAndPropertyObjectReferences;
 };
 
-struct UClass : public UStruct
-{
-	UCHAR unknowndata_00[0x456];
-};
 
+/*	needs fixing	*/
 struct FUObjectItem
 {
 	UObject* Object;
@@ -82,6 +92,9 @@ struct FUObjectItem
 	UCHAR    unknowndata_00[0x4];
 };
 
+
+
+/*	needs fixing	*/
 struct FChunkedFixedUObjectArray
 {
 	FUObjectItem** Objects;
@@ -90,71 +103,30 @@ struct FChunkedFixedUObjectArray
 	int32_t        NumElements;
 };
 
+
+
+/*	needs fixing	*/
 struct FUObjectArray
 {
 	int32_t        ObjFirstGCIndex;
 	int32_t        ObjLastNonGCIndex;
 	int32_t        MaxObjectsNotConsideredByGC;
 	int32_t        OpenForDisregardForGC;
-	FChunkedFixedUObjectArray* ObjObjects;
+	FChunkedFixedUObjectArray ObjObjects;
 };
 
-struct FNameEntry
-{
-	int32_t     Index;
-	UCHAR       unknowndata_00[0x4];
-	FNameEntry* HashNext;
-
-	union
-	{
-		UCHAR AnsiName[1024];
-		WCHAR WideName[1024];
-	};
-};
-
-template <typename ElementType, int32_t MaxTotalElements, int32_t ElementsPerChunk>
-class TStaticIndirectArrayThreadSafeRead
-{
-public:
-	int32_t Num() const
-	{
-		return numElements;
-	}
-
-	bool IsValidIndex(const int32_t index) const
-	{
-		return index >= 0 && index < Num() && GetById(index) != nullptr;
-	}
-
-	ElementType const* const& GetById(int32_t index) const
-	{
-		return *GetItemPtr(index);
-	}
-
-private:
-	ElementType const* const* GetItemPtr(const int32_t Index) const
-	{
-		const auto ChunkIndex       = Index / ElementsPerChunk;
-		const auto WithinChunkIndex = Index % ElementsPerChunk;
-		const auto Chunk            = chunks[ChunkIndex];
-
-		return Chunk + WithinChunkIndex;
-	}
-
-	enum
-	{
-		ChunkTableSize = (MaxTotalElements + ElementsPerChunk - 1) / ElementsPerChunk
-	};
-
-	ElementType** chunks[ChunkTableSize];
-	int32_t       numElements;
-	int32_t       numChunks;
-};
-
-using TNameEntryArray = TStaticIndirectArrayThreadSafeRead<FNameEntry, 2 * 1024 * 1024, 16384>;
 
 
 struct FString
 {
 	TArray<TCHAR> DataType;
 };
+
+
+
+FUObjectArray* GObjects{ };
+
+DWORD64		moduleBase;
+
+typedef		FString* (__fastcall* pFNameToString)(FName* This, FString* retstr);
+pFNameToString	fnameToString;

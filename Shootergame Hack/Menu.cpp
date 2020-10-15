@@ -63,7 +63,7 @@ void SetStyle()
 
     style->WindowPadding = ImVec2(15, 15);
     style->WindowRounding = 5.0f;
-    style->FramePadding = ImVec2(50, 5);
+    style->FramePadding = ImVec2(40, 5);
     style->FrameRounding = 4.0f;
     style->ItemSpacing = ImVec2(14, 8);
     style->ItemInnerSpacing = ImVec2(8, 6);
@@ -73,9 +73,9 @@ void SetStyle()
     style->GrabMinSize = 2.0f;
     style->GrabRounding = 3.0f;
 
-    style->Colors[ImGuiCol_Text] = ImVec4(0.91f, 0.32f, 0.12f, 1.00f);
+    style->Colors[ImGuiCol_Text] = ImVec4(1.0f, 0.00f, 0.26f, 1.00f);
     style->Colors[ImGuiCol_TextDisabled] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
-    style->Colors[ImGuiCol_WindowBg] = ImVec4(0.12f, 0.00f, 0.10f, 1.00f);
+    style->Colors[ImGuiCol_WindowBg] = ImVec4(0.11f, 0.00f, 0.09f, 1.00f);
     style->Alpha = 1.0f;
     style->Colors[ImGuiCol_PopupBg] = ImVec4(0.07f, 0.07f, 0.09f, 1.00f);
     style->Colors[ImGuiCol_Border] = ImVec4(0.34f, 0.15f, 0.30f, 1.00f);
@@ -114,8 +114,8 @@ void SetStyle()
     style->Colors[ImGuiCol_TabHovered] = ImVec4(0.36f, 0.15f, 0.31f, 1.00f);
 
 
-    style->FrameRounding = 4.0f;
-    style->WindowRounding = 5.0f;
+    style->FrameRounding = 1.0f;
+    style->WindowRounding = 3.0f;
 
 }
 
@@ -183,7 +183,7 @@ int    OverlayLoop()
     ImGui_ImplDX9_Init(g_pd3dDevice);
 
 
-    ImFont* font = io.Fonts->AddFontFromFileTTF(("c:\\Windows\\Fonts\\Arial.ttf"), 15.0f);
+    ImFont* font = io.Fonts->AddFontFromFileTTF(("c:\\Windows\\Fonts\\Arial.ttf"), 14.0f);
     //IM_ASSERT(font != NULL);
 
 
@@ -219,15 +219,15 @@ int    OverlayLoop()
 
         if (GetKeyState(VK_INSERT) & 0x8000)
         {
-            if ((GetTickCount() - LastTick) > 200)
+            if ((GetTickCount64() - LastTick) > 200)
             {
                 ShowMenu = !ShowMenu;
-                LastTick = GetTickCount();
+                LastTick = GetTickCount64();
             }
         }
 
 
-        if (ShowMenu)
+        if (ShowMenu == true)
         {
             // ImGui::ShowDemoWindow();
             SetStyle();

@@ -143,7 +143,9 @@
     <ClCompile Include="DLLEntry.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dump_offsets.h" />
     <ClInclude Include="EngineClasses.h" />
+    <ClInclude Include="Offsets.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

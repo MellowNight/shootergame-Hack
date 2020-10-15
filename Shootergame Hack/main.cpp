@@ -26,7 +26,7 @@ int		main()
 
 	while (procId == 0)
 	{
-		procId = Utils::FindProcessId(L"ShooterGame.exe");
+		procId = Utils::FindProcessId(L"ShooterGame-Win64-Shipping.exe");
 	}
 
 	std::cout << "shooterGame Found!" << std::endl;
@@ -34,7 +34,7 @@ int		main()
 	Globals->processID = procId;
 	Globals->processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, procId);
 
-	moduleBase = Utils::GetModuleBaseAddress(procId, L"ShooterGame.exe");
+	moduleBase = Utils::GetModuleBaseAddress(procId, L"ShooterGame-Win64-Shipping.exe");
 	updateInfo(moduleBase);
 
 	std::thread		overlayLoop(OverlayLoop);
