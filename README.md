@@ -18,4 +18,4 @@ ESP features:
 
 
 Example UE4 dumper output:
-![Screenshot](1602616508762.png)
+![Screenshot](unknown.png)
