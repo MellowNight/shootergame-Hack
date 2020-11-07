@@ -10,10 +10,35 @@ struct TArray
 	int32_t Max;
 };
 
+struct FString
+{
+	TArray<TCHAR> DataType;
+};
+
+struct FName;
+
+
+typedef		FString* (__fastcall* pFNameToString)(FName* This, FString* retstr);
+pFNameToString	FnameToString;
+
 struct FName
 {
 	int32_t Index;
 	int32_t Number;
+
+	TArray<TCHAR>	ToString()
+	{
+		FString	objName;
+
+		FnameToString(this, &objName);
+
+		TArray<TCHAR> charsArray = objName.DataType;
+		*(TCHAR*)(charsArray.Data + charsArray.Num - 1) = '\0';
+
+		return charsArray;
+	}
+
+
 };
 
 
@@ -117,16 +142,7 @@ struct FUObjectArray
 
 
 
-struct FString
-{
-	TArray<TCHAR> DataType;
-};
-
-
 
 FUObjectArray* GObjects{ };
 
 DWORD64		moduleBase;
-
-typedef		FString* (__fastcall* pFNameToString)(FName* This, FString* retstr);
-pFNameToString	fnameToString;

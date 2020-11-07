@@ -3,7 +3,6 @@
 #include "EngineClasses.h"
 #include "dump_offsets.h"
 
-
 void dumpObjects()
 {
 	std::ofstream file {"GObjectsDump.txt"};
@@ -15,21 +14,13 @@ void dumpObjects()
 		for (int i = 0; i < GObjects->ObjObjects.NumElements; i++)
 		{
 			if (!objectArray[i].Object)
+			{
 				continue;
+			}
 
-			FString	objName;
+			TArray<TCHAR> charsArray = objectArray[i].Object->Name.ToString();
 
-			fnameToString(&(objectArray[i].Object->Name), &objName);
-
-			TArray<TCHAR> charsArray = objName.DataType;
-			*(TCHAR*)(charsArray.Data + charsArray.Num-1) = '\0';
-
-
-			file << "[" << std::right << std::dec << std::setw(6) << std::setfill('0')
-				<< i << std::setfill(' ') << "] " << std::left << std::setw(70) << Utils::ws2s(charsArray.Data)
-				<< std::dec << " Object ID: " << *(DWORD64*)(&objectArray[i].Object->Name)
-				<< std::endl;
-
+			formattedPrint(file, objectArray[i].Object->Name, charsArray, i);
 		}
 
 		file.close();
@@ -46,7 +37,7 @@ HRESULT onAttach(HMODULE hModule)
 	MessageBoxA(nullptr, MsgBox.str().c_str(), "UE4 Instance Logger", MB_OK);
 
 	GObjects = (FUObjectArray*)(moduleBase + Offsets::GObjects);
-	fnameToString = (pFNameToString)(moduleBase + Offsets::fnameToString);
+	FnameToString = (pFNameToString)(moduleBase + Offsets::fnameToString);
 
 
 	dumpObjects();

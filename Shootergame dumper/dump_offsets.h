@@ -3,6 +3,18 @@
 #include "EngineClasses.h"
 
 
+
+
+void	formattedPrint(std::ofstream& file, FName fname, TArray<TCHAR>	charsArray, int i)
+{
+	file << "[" << std::right << std::dec << std::setw(6) << std::setfill('0')
+		<< i << std::setfill(' ') << "] " << std::left << std::setw(70) << Utils::ws2s(charsArray.Data)
+		<< std::dec << " Object ID: " << *(DWORD64*)(&fname)
+		<< std::endl;
+
+}
+
+
 DWORD64 findOffset(const wchar_t* className, const wchar_t*	fieldName)
 {
 
@@ -12,16 +24,11 @@ DWORD64 findOffset(const wchar_t* className, const wchar_t*	fieldName)
 	for (int i = 0; i < GObjects->ObjObjects.NumElements; i++)
 	{
 		if (!objectArray[i].Object)
+		{
 			continue;
+		}
 
-
-		FString	objName;
-		fnameToString(&(objectArray[i].Object->Name), &objName);
-
-
-		TArray<TCHAR> charArray1 = objName.DataType;
-		*(TCHAR*)(charArray1.Data + charArray1.Num - 1) = '\0';
-
+		TArray<TCHAR> charArray1 = objectArray[i].Object->Name.ToString();
 
 
 		if (!wcscmp(className, charArray1.Data))
@@ -41,11 +48,7 @@ DWORD64 findOffset(const wchar_t* className, const wchar_t*	fieldName)
 
 
 				FString   propertyName;
-				fnameToString(&fName, &propertyName);
-
-				TArray<TCHAR> charArray = propertyName.DataType;
-				*(TCHAR*)(charArray.Data + charArray.Num - 1) = '\0';
-
+				TArray<TCHAR> charArray = objectArray[i].Object->Name.ToString();
 
 				if (!wcscmp(charArray.Data, fieldName))
 				{
@@ -80,13 +83,7 @@ DWORD64 dump_class(std::ofstream&	file, const wchar_t* className)
 
 
 		FString	objName;
-		fnameToString(&(objectArray[i].Object->Name), &objName);
-
-
-		TArray<TCHAR> charArray1 = objName.DataType;
-		*(TCHAR*)(charArray1.Data + charArray1.Num - 1) = '\0';
-
-
+		TArray<TCHAR> charArray1 = objectArray[i].Object->Name.ToString();
 
 		if (!wcscmp(className, charArray1.Data))
 		{
@@ -107,13 +104,7 @@ DWORD64 dump_class(std::ofstream&	file, const wchar_t* className)
 					DWORD	offset_internal = ((FProperty*)fieldEntry)->Offset_Internal;
 					FName	fName = fieldEntry->NamePrivate;
 
-
-					FString   propertyName;
-					fnameToString(&fName, &propertyName);
-
-					TArray<TCHAR> charArray = propertyName.DataType;
-					*(TCHAR*)(charArray.Data + charArray.Num - 1) = '\0';
-
+					TArray<TCHAR> charArray = fName.ToString();
 
 
 					file << "\t [+]  " << Utils::ws2s(charArray1.Data) << "->" << std::left << std::setw(60) << Utils::ws2s(charArray.Data)
@@ -132,6 +123,8 @@ DWORD64 dump_class(std::ofstream&	file, const wchar_t* className)
 
 	return 0x9999999999;	/*	custom error code	*/
 }
+
+
 
 void	dumpOffsets()
 {
