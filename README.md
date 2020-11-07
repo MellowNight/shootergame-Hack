@@ -19,3 +19,6 @@ ESP features:
 
 ##  Example UE4 dumper output:
 ![Screenshot](unknown.png)
+
+
+NOTE: some fields aren't included in object or FField list, so they cannot be dumped
