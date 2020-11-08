@@ -7,5 +7,5 @@
 #include "commands.h"
 #include "Menu.h"
 
-void	updateInfo(DWORD64	modBase);
+void	updateInfo();
 void	handleMiscCommands(HANDLE	processHandle, DWORD64	localPawn);

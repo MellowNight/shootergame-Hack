@@ -18,7 +18,6 @@ void Color(int color)
 int		main()
 {
 	int			procId = 0;
-	DWORD64		moduleBase;
 
 	Color(5);
 
@@ -34,8 +33,8 @@ int		main()
 	Globals->processID = procId;
 	Globals->processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, procId);
 
-	moduleBase = Utils::GetModuleBaseAddress(procId, L"ShooterGame-Win64-Shipping.exe");
-	updateInfo(moduleBase);
+	Globals->moduleBase = Utils::GetModuleBaseAddress(procId, L"ShooterGame-Win64-Shipping.exe");
+	updateInfo();
 
 	std::thread		overlayLoop(OverlayLoop);
 	std::thread		aimThread(mouseAimbot);
@@ -43,7 +42,7 @@ int		main()
 	while(1)
 	{
 		/*	update all of the game info		*/
-		updateInfo(moduleBase);
+		updateInfo();
 		handleMiscCommands(Globals->processHandle, localGameInfo->localPawn);
 	}
 

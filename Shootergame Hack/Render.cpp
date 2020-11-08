@@ -119,7 +119,7 @@ HWND    FindTopWindow(DWORD pid)
     return 0;
 }
 
-void	initWindow(int processID)
+void	setWindowPosition(int processID)
 {
     HWND	hwnd = FindTopWindow(processID);
 

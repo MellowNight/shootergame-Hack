@@ -20,6 +20,7 @@
 class GAME_INFO
 {
 public:
+	DWORD64		gameInstance;
 	DWORD64		rootComponent;
 	DWORD64		localPawn;
 	DWORD64		actorList;
@@ -31,12 +32,25 @@ public:
 	int			actorCount;
 	int			localactorId;
 	vector3D	position;
+
+
+	void	updateGameInstance();
+	void	updateLocalPlayer();
+	void	updateplayerController();
+	void	updatelocalPawn();
+	void	updateRootComponent();
+	void	updatepersistentLevel();
+	void	updateactorList();
+	void	updateCameraCache();
+	void	updatePosition();
+	void	updateactorCount();
 };
 
 class GLOBALS
 {
 public:
 	int			processID;
+	DWORD64		moduleBase;
 	HANDLE		processHandle;
 	LONG		windowWidth;
 	LONG		windowHeight;

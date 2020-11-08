@@ -23,4 +23,4 @@ namespace Render
 
 void    HelpMarker(const char* desc);
 
-void	initWindow(int processID);
+void	setWindowPosition(int processID);
