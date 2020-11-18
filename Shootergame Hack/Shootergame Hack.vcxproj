@@ -160,7 +160,6 @@
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Misc.cpp" />
-    <ClCompile Include="Offsets.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>

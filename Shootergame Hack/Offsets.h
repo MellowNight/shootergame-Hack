@@ -3,46 +3,49 @@
 
 namespace Offsets
 {
-	/*	general things	*/
+	enum Offset : DWORD64
+	{
+		/*	general things	*/
 
-	extern	DWORD64		GWORLD;
-	extern	DWORD64		gameInstance;
-	extern	DWORD64		persistentLevel;
-	extern	DWORD64		localPlayers;
-	extern	DWORD64		actorsArray;
-	extern	DWORD64		actorCount;
-	extern	DWORD64		objectID;
+		GWORLD = 0x83039B8,
+		gameInstance = 0x188,
+		persistentLevel = 0x30,
+		localPlayers = 0x38,
+		actorsArray = 0x98,
+		actorCount = 0xA0,
+		objectID = 0x18,
 
-	/*	Actor specific		*/
+		/*	Actor specific		*/
 
-	extern	DWORD64		playerController;
-	extern	DWORD64		APawn;
-	extern	DWORD64		RootComponent;
-
-
-	/*	RootComponent specific	*/
-
-	extern	DWORD64		componentToWorld;
-	extern	DWORD64		Translation;	/*	(x, y, z)	*/
+		playerController = 0x30,
+		APawn = 0x250,
+		RootComponent = 0x130,
 
 
-	/*	game pawn specific	*/
+		/*	RootComponent specific	*/
 
-	extern	DWORD64		pawnHealth;
-	extern	DWORD64		CurrentWeapon;
-	extern	DWORD64		RunningSpeedModifier;
-	extern	DWORD64		IsTargeting;    // this is an int, & 1 to get the status
+		componentToWorld = 0x1C0,
+		Translation = 0x1D0,	/*	(x, y, z)	*/
 
 
-	/*	weapon specific		*/
-	extern	DWORD64		currentAmmo;
-	extern	DWORD64		LastFireTime;
+		/*	game pawn specific	*/
 
-	/*	camera Offsets	*/
-	extern	DWORD64		CameraManager;
-	extern	DWORD64		cameraCachePrivate;
-	extern	DWORD64		POV;
-	extern	DWORD64		cameraVector;
-	extern	DWORD64		cameraRotation;
-	extern	DWORD64		cameraFOV;
+		pawnHealth = 0x69C,
+		CurrentWeapon = 0x4E8,
+		RunningSpeedModifier = 0x624,
+		IsTargeting = 0x620,    // this is an int, & 1 to get the status
+
+
+		/*	weapon specific		*/
+		currentAmmo = 0x474,
+
+
+		/*	Camera	Offsets		*/
+		CameraManager = 0x2B8,
+		cameraCachePrivate = 0x1A60,
+		POV = 0x10,
+		cameraVector = 0x0,
+		cameraRotation = 0xC,
+		cameraFOV = 0x18
+	};
 }

@@ -58,19 +58,12 @@ C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\globals.cpp(59
           [
               T=DWORD64
           ]
-  imgui.cpp
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_impl_dx9.cpp
-  imgui_impl_win32.cpp
-  imgui_widgets.cpp
   main.cpp
   C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
 C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Menu.h(12,1): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
 C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h(42): message : see previous definition of 'DIRECTINPUT_VERSION'
 C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Menu.h(42,1): warning C4305: '=': truncation from 'double' to 'float'
 C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Menu.h(46,1): warning C4305: '=': truncation from 'double' to 'float'
-  Math.cpp
   Menu.cpp
   C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
 C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Menu.h(12,1): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
@@ -87,56 +80,29 @@ C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Menu.h(12,1): 
 C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h(42): message : see previous definition of 'DIRECTINPUT_VERSION'
 C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Menu.h(42,1): warning C4305: '=': truncation from 'double' to 'float'
 C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Menu.h(46,1): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Misc.cpp(18,53): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Misc.cpp(19,53): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=DWORD64
           ]
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Misc.cpp(33,20): warning C4309: 'initializing': truncation of constant value
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Misc.cpp(73,15): warning C4309: '=': truncation of constant value
+C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Misc.cpp(34,20): warning C4309: 'initializing': truncation of constant value
+C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Misc.cpp(74,15): warning C4309: '=': truncation of constant value
 C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\commands.h(10,30): warning C4244: '=': conversion from 'BOOL' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Misc.cpp(40): message : see reference to function template instantiation 'T Driver::write<float>(HANDLE,DWORD64,T *)' being compiled
+C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Misc.cpp(41): message : see reference to function template instantiation 'T Driver::write<float>(HANDLE,DWORD64,T *)' being compiled
           with
           [
               T=float
           ]
 C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\commands.h(10,30): warning C4244: 'argument': conversion from 'BOOL' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Misc.cpp(60): message : see reference to function template instantiation 'T Driver::write<vector3D>(HANDLE,DWORD64,T *)' being compiled
+C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Misc.cpp(61): message : see reference to function template instantiation 'T Driver::write<vector3D>(HANDLE,DWORD64,T *)' being compiled
           with
           [
               T=vector3D
           ]
-  Offsets.cpp
-  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-  Render.cpp
-  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(8,66): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(8,44): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(32,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(32,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(32,74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(32,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(42,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(57,20): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(57,17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(57,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(57,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(62,20): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(62,17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(62,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(62,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(67,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(67,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(67,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(67,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(71,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(71,17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(71,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jguo5\Documents\GitHub\shootergame-Hack\Shootergame Hack\Render.cpp(71,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   utils.cpp
   C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
   Generating Code...
